@@ -10,13 +10,13 @@ export const generateMeshyModel = async (apiKey: string, imageUrl: string): Prom
   // Browsers block direct calls to Meshy API from client-side due to CORS.
   // We route requests through corsproxy.io.
   const PROXY_BASE = 'https://corsproxy.io/?url=';
-  const API_URL = 'https://api.meshy.ai/openapi/v1/multi-image-to-3d';
+  const API_URL = '/api/meshy/openapi/v1/multi-image-to-3d';
   
   // Helper to construct proxied URLs
   // We encode the target URL to ensure special characters don't break the proxy query param.
   // We also add a timestamp parameter to the PROXY URL (not the target URL) to prevent browser/proxy caching.
   const getProxiedUrl = (target: string) => {
-    return `${PROXY_BASE}${encodeURIComponent(target)}&_=${Date.now()}`;
+    return `${PROXY_BASE}${encodeURIComponent(target)}`;
   };
   
   // 1. Start Generation Task

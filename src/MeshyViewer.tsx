@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { LegalAnalysis } from '../types';
+import type { LegalAnalysis } from '../types';
 
 // Declare custom element for TypeScript
 declare global {

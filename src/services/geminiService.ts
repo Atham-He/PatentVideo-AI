@@ -1,6 +1,6 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { PatentAnalysis, LegalAnalysis } from "../types";
+import type { PatentAnalysis, LegalAnalysis } from "../../types";
 
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY });
 

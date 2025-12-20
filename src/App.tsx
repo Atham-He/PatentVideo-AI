@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Layout } from './components/Layout';
+import { Layout } from './Layout';
 import { analyzePatent, generateStructuralVideo, identifyPatentFigures, performLegalAnalysis } from './services/geminiService';
 import { generateMeshyModel } from './services/meshyService';
-import { MeshyViewer } from './components/MeshyViewer';
-import { AppState } from './types';
+import { MeshyViewer } from './MeshyViewer';
+import type { AppState } from '../types';
 
 // Mocking PDF.js globally as it is loaded in index.html
 declare const pdfjsLib: any;
@@ -186,7 +186,7 @@ const App: React.FC = () => {
 
              <div className="relative z-10">
                 <div className="flex justify-between items-center mb-8">
-                  <h2 className="text-2xl font-semibold tracking-tight">Upload Patent Specification</h2>
+                  <h2 className="text-2xl font-semibold tracking-tight text-white">Upload Patent Specification</h2>
                   <button 
                     onClick={handleSelectKey}
                     className={`text-xs px-4 py-1.5 rounded-full font-medium transition-all ${state.isVeoKeySelected ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'}`}

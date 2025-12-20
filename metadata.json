@@ -1,5 +1,5 @@
 {
-  "name": "PatentVision AI",
-  "description": "An advanced tool for analyzing American patents using Gemini-3-Pro for deep structural insights and Veo-3.1 for generating architectural schematics and 3D visualization videos.",
-  "requestFramePermissions": []
+  "description": "ai-workspace",
+  "requestFramePermissions": [],
+  "name": "ai-workspace"
 }
