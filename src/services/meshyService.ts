@@ -2,6 +2,7 @@
 export const generateMeshyModel = async (apiKey: string, imageUrl: string): Promise<string> => {
   // FALLBACK: Directly use the hardcoded key if the passed key is empty or undefined.
   const validApiKey = apiKey || 'msy_nOLxD8n4qCBD57UD2rblZLxYxHIIyqIshEK8';
+  // return "/api/assets/uploads/Meshy_AI_Blade_Assembly_Diagra_1220151824_generate.glb?Expires=1766361600&Signature=gLweWhkRE~PrTLWp1BIIjmJNFVlDCmE9PsprTP5rYFG6bI-x-Ue0ZwL3MRZZgsSC4T2R0PUQ154WAB1hrl5ASREK0MbbFD-ZWXeuaEHcB7vtjnxkKovIW~fTwDY7ZmvTu2-pEcfovyHFkijqX1dhvZoBcrO7kQjvApiTK3rennp3atWiCephnyZm7RPRf6Aey9qgkacL5FfGdH3JIhRAAhkHnjGF-mFn39Mtv9n0w6BcchZGYg5Z37-XrfUxgo2TSGMRDXQYxOWKNIjhqYXwb8g1BhicMEsFdNitosgyLKvNH3Az6cPYE-SowgiQgaFdXEnZKlHERtJ6T6O0Fcn2uw__&Key-Pair-Id=KL5I0C8H7HX83";
 
   // DOCUMENTATION: https://docs.meshy.ai/api/v2/image-to-3d
   // Updated to V2 API to resolve routing errors.
@@ -64,7 +65,6 @@ export const generateMeshyModel = async (apiKey: string, imageUrl: string): Prom
   // 2. Poll for Completion
   return new Promise((resolve, reject) => {
     let attempts = 0;
-    resolve("http://localhost:5173/api/meshy-assets/44510aba-73ee-4f3b-a5c8-3b981ace204a/tasks/019b3c45-fea7-716b-a655-783c5fe3b7d1/output/model.glb?Expires=1766502156&Signature=iXnoSIwjReur2ynWRgztzkEIUlOCyogtXFZBl0q8jI7hsWOirIFB6ymPdd2vUSQO-5qZAYoldqqgQNPWyeHMtWTpi71zSinrj1b~pLnbRQF3sahZF6dhRPf70XCJdjEfiajUBy7f5oQ~CEG8-0neSqSOWXsXJGH8npJahrwpD6J0eBMkJT0BOsJYGNYvQLh9-ezZXpS6iBBRnVnlsDF9Z5k3J7lmlEklz~OTwD5--Oa9S~qPopGgnegjNpBBqpx9ynpWMHg2khSgeR1fQ22TZwF-rciFf3JTpr05sykT0ndKETePiOvej3fHv3CHXgrY7E7-aXT3KfYrJuTGTPB55g__&Key-Pair-Id=KL5I0C8H7HX83");
 
     // Timeout set to 6 minutes
     const maxAttempts = 300;
@@ -100,7 +100,7 @@ export const generateMeshyModel = async (apiKey: string, imageUrl: string): Prom
         if (statusData.status === 'SUCCEEDED') {
           clearInterval(interval);
           if (statusData.model_urls?.glb) {
-            const proxiedGlbUrl = statusData.model_urls.glb.replace('https://assets.meshy.ai', '/api/meshy-assets');
+            const proxiedGlbUrl = statusData.model_urls.glb.replace('https://assets.meshy.ai', '/api/assets');
             resolve(proxiedGlbUrl);
           } else {
             reject(new Error("Generation succeeded but GLB URL is missing"));

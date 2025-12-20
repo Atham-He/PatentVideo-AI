@@ -26,10 +26,10 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/api\/meshy/, ''),
           secure: true
         },
-        '/api/meshy-assets': {
+        '/api/assets': {
           target: 'https://assets.meshy.ai',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api\/meshy-assets/, ''),
+          rewrite: (path) => path.replace(/^\/api\/assets/, ''),
           secure: true
         }
       }
