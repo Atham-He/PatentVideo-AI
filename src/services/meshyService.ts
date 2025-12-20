@@ -30,7 +30,7 @@ export const generateMeshyModel = async (apiKey: string, imageUrl: string): Prom
     body: JSON.stringify({
       image_url: imageUrl,
       enable_pbr: true,
-      ai_model: "meshy-4"
+      // ai_model: "meshy-4"
     })
   });
 

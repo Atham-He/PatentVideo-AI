@@ -8,7 +8,7 @@ export const identifyPatentFigures = async (images: string[]): Promise<number[]>
   const ai = getAI();
   // Use Flash for fast image classification
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-3-pro-preview",
     contents: [
       {
         parts: [
@@ -44,7 +44,7 @@ export const performLegalAnalysis = async (images: string[]): Promise<LegalAnaly
   
   // Use Pro for complex legal reasoning
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3-pro-preview",
     contents: [
       {
         parts: [
@@ -92,7 +92,7 @@ export const analyzePatent = async (images: string[]): Promise<PatentAnalysis> =
   const ai = getAI();
   
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3-pro-preview",
     contents: [
       {
         parts: [
