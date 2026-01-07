@@ -19,7 +19,7 @@ export const identifyPatentFigures = async (images: string[]): Promise<number[]>
             }
           })),
           { 
-            text: `Look at these patent pages. Return a JSON object with a list of indices (0-based) corresponding to pages that contain VISUAL TECHNICAL DRAWINGS or FIGURES. Ignore pages that are purely text.`
+            text: `Look at these patent pages. Return a JSON object with a list of indices (0-based) corresponding to pages that contain **only** clean VISUAL TECHNICAL DRAWINGS or FIGURES suitable for 3D modeling. **Exclude** pages with significant text, mixed content, or unclear sketches. The goal is to extract clean inputs for a multi-image-to-3D AI model.`
           }
         ]
       }
@@ -35,7 +35,9 @@ export const identifyPatentFigures = async (images: string[]): Promise<number[]>
     }
   });
   
-  const result = JSON.parse(response.text);
+  const text = response.text;
+  if (!text) throw new Error("No response from Gemini");
+  const result = JSON.parse(text);
   return result.figureIndices || [];
 };
 
@@ -85,7 +87,9 @@ export const performLegalAnalysis = async (images: string[]): Promise<LegalAnaly
     }
   });
 
-  return JSON.parse(response.text);
+  const text = response.text;
+  if (!text) throw new Error("No response from Gemini");
+  return JSON.parse(text);
 }
 
 export const analyzePatent = async (images: string[]): Promise<PatentAnalysis> => {
@@ -131,7 +135,9 @@ export const analyzePatent = async (images: string[]): Promise<PatentAnalysis> =
     }
   });
 
-  return JSON.parse(response.text);
+  const text = response.text;
+  if (!text) throw new Error("No response from Gemini");
+  return JSON.parse(text);
 };
 
 export const generateStructuralVideo = async (prompt: string): Promise<string> => {

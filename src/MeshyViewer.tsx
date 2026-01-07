@@ -2,26 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import type { LegalAnalysis } from '../types';
 
-// Declare custom element for TypeScript
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'model-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-        src?: string;
-        alt?: string;
-        ar?: boolean;
-        'camera-controls'?: boolean;
-        'touch-action'?: string;
-        poster?: string;
-        'shadow-intensity'?: string;
-        'environment-image'?: string;
-        'auto-rotate'?: boolean;
-        exposure?: string;
-      };
-    }
-  }
-}
-
 interface MeshyViewerProps {
   modelUrl: string;
   legalData: LegalAnalysis | null;
@@ -37,6 +17,7 @@ export const MeshyViewer: React.FC<MeshyViewerProps> = ({ modelUrl, legalData })
 
   useEffect(() => {
      // Optional: interact with the model viewer API if needed
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
      const viewer = viewerRef.current as any;
      if(viewer && showRisk) {
          // If we had specific material names, we could tint them here.
@@ -48,7 +29,9 @@ export const MeshyViewer: React.FC<MeshyViewerProps> = ({ modelUrl, legalData })
     <div className="w-full h-full min-h-[500px] relative group overflow-hidden" style={{ backgroundColor: BG_COLOR }}>
       
       {/* Google Model Viewer Component */}
+      {/* @ts-expect-error - Custom Element */}
       <model-viewer
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={viewerRef as any}
         src={modelUrl}
         alt="Generated 3D Patent Model"
@@ -57,12 +40,14 @@ export const MeshyViewer: React.FC<MeshyViewerProps> = ({ modelUrl, legalData })
         shadow-intensity="1"
         exposure="0.8"
         auto-rotate
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         style={{ width: '100%', height: '100%', '--progress-bar-color': '#60a5fa' } as any}
       >
           {/* Custom Loading Slot */}
           <div slot="poster" className="flex items-center justify-center w-full h-full text-white">
              Loading 3D Model...
           </div>
+      {/* @ts-ignore */}
       </model-viewer>
 
       {/* Editor-like UI Overlay */}
